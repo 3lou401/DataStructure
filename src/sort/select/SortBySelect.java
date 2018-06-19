@@ -16,6 +16,7 @@ public class SortBySelect {
                     min=j;
             }
             swap(a[min],a[i]);
+
         }
     }
     //TODO 交换的时候，是传值调用，不可以直接调用
