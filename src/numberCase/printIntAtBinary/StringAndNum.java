@@ -1,4 +1,4 @@
-package String.withNumber;
+package numberCase.printIntAtBinary;
 
 /**
  * @Author: leaderHoo
