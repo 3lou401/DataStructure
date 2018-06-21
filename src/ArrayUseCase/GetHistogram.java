@@ -39,6 +39,7 @@ public class GetHistogram {
         return b;
     }
 
+    //存在限制条件 ：a[n]取值范围 [1,n]，所以才可以。
     public static void main(String[] args) {
       /*  int []a = {1,1,2,1,3,2,5,2,5,2,5,0,12,55};
         GetHistogram gh = new GetHistogram();
@@ -49,8 +50,9 @@ public class GetHistogram {
 
         //采用while循环
         while (i < n) {
-            //由于元素取值范围为[1,N]，因此，可以将（当前元素值-1）作为下标值，找到相应位置处的元素，将其存储的值作为-times，因为原来存储值都为正值，为防止混淆，用负值存储
-            int temp = a[i] - 1;
+            //由于元素取值范围为[1,N]，因此，可以将（当前元素值-1）作为下标值，找到相应位置处的元素，
+            // 将其存储的值作为-times，因为原来存储值都为正值，为防止混淆，用负值存储
+            int temp = a[i] - 1; //表示当前值对应下标
             if (temp < 0) { //表示该元素已经处理过了，跳过
                 i++;
                 continue;
