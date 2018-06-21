@@ -24,6 +24,12 @@ public class GetNArray {
         return false;
     }
 
+    public boolean [][] getArray(int N){
+        boolean [][] res = new boolean[N][N];
+        
+        return res;
+    }
+
     public static void main(String[] args) {
         System.out.printf("3与6是否互斥"+arePremeNumbers(3,6));
         System.out.printf("3与4是否互斥"+arePremeNumbers(3,4));
