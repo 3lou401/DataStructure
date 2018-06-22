@@ -23,8 +23,7 @@ public class SortbyInsert {
         System.out.printf(Arrays.toString(list));
     }
 
-    public  void SortByInsert(){
-        int [] list={1,3,5,2,4,9,6};
+    public static  void SortByInsert(int [] list){
         //外层循环控制每一个位置的元素；内层循环负责移位( i =1； j=i & a[j] < a[j-1])
         for (int i = 1; i < list.length; i++) {
             int j = 0;
@@ -37,6 +36,5 @@ public class SortbyInsert {
             list[j + 1] = temp;
 
         }
-        System.out.printf(Arrays.toString(list));
     }
 }

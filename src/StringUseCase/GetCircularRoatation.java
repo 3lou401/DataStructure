@@ -22,10 +22,20 @@ public class GetCircularRoatation {
         }
         return false;
     }
+    //TODO 递归的时候一定注意边界条件，之前因为 判断N <=0退出，但是实际上会一直无法退出
+    public static String mystery(String s){
+        int N = s.length();
+        if (N <= 1)
+            return s;
+        String a = s.substring(0,N/2);
+        String b = s.substring(N/2,N);
+        return mystery(a)+mystery(b);
+    }
 
     public static void main(String[] args) {
         String s1 = "ABDS";
-        String s2 = "BDSD";
-        System.out.printf("s1==s2 is "+isCircular(s1,s2));
+//        String s2 = "BDSD";
+////        System.out.printf("s1==s2 is "+isCircular(s1,s2));
+        System.out.printf("mystery(ABDS)="+mystery("ABSD"));
     }
 }
