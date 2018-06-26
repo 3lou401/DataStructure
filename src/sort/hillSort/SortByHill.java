@@ -8,6 +8,13 @@ import java.util.GregorianCalendar;
  * @desc： 希尔排序:在数组中采用跳跃式分组的策略，通过某个增量将数组元素划分为若干组
  *          然后逐渐缩小增量。实际使用时，便可以避免出现直接插入排序移动元素过多的问题
  *      注意：希尔排序为不稳定性排序。因为相同的元素可能在各自的插入排序中移动
+ * @Notify :
+ *      1.希尔排序 ：核心就是保证间隔为N的数组有序，逐渐减小N
+ *          while(h >=1) //最外层 减小
+ *              for(int i =h;i<len;i++) //内层控制数据比较
+ *                  for（int j =i ;j-h>0 && a[j] <a[j-h];i-=h）
+ *           h/=2;
+ *      2. 计算最开始h的时候； 可以直接用 len/2 或者 while(h < len/2) h=h*2+1;
  */
 
 public class SortByHill {
@@ -58,6 +65,22 @@ public class SortByHill {
         }
     }
 
+
+    public  void sort6(int []a){
+        int N = a.length;
+        int h = 1;
+        while (h < N/2){
+            h=2*h+1;
+        }
+        while (h<=1){
+            for (int i = h;i<N;i++){
+                for (int j=i;j-h>0&&a[j]<a[j-h];j-=h){
+                    swap(a,j,j-h);
+                }
+            }
+            h/=2;
+        }
+    }
     /**
      * 希尔排序 针对有序序列在插入时采用移动法。
      * @param arr
