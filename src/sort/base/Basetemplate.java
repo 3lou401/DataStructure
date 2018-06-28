@@ -8,10 +8,12 @@ import java.util.Scanner;
  * @Date: 2018/6/28 15:41
  * @desc： 排序需要的基础模板
  */
-public  class Basetemplate {
-    public static void sort(Comparable [] a){};
+public abstract class Basetemplate {
+
+
+    public abstract void sort(Comparable[] a);
     
-   private  static boolean less(Comparable a,Comparable b){
+   public static boolean less(Comparable a, Comparable b){
        return a.compareTo(b) < 0;
    }
    //交换数组元素
@@ -39,6 +41,10 @@ public  class Basetemplate {
 
     public static void main(String[] args) {
        String []a = {"a","ss"};
-        System.out.printf("array is sort - "+ isSorted(a));
+        // System.out.printf("array is sort - "+ isSorted(a));
+        long time = CalcTime.calcLastTime("sort.base.Basetemplate","test");
+        System.out.printf("time == "+ time);
     }
+
+
 }
