@@ -14,6 +14,8 @@ public abstract class Basetemplate {
     public abstract void sort(Comparable[] a);
     
    public static boolean less(Comparable a, Comparable b){
+       if (a == null || b == null)
+           return false;
        return a.compareTo(b) < 0;
    }
    //交换数组元素
@@ -42,7 +44,7 @@ public abstract class Basetemplate {
     public static void main(String[] args) {
        String []a = {"a","ss"};
         // System.out.printf("array is sort - "+ isSorted(a));
-        long time = CalcTime.calcLastTime("sort.base.Basetemplate","test");
+        long time = CalcTime.calcLastTime("sort.base.Basetemplate","test",a);
         System.out.printf("time == "+ time);
     }
 

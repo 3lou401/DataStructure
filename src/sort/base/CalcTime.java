@@ -10,7 +10,7 @@ import Utils.MethodProxy;
 public class CalcTime {
 
     //查看一个算法执行时间
-    public static long calcLastTime(String className,String method,Object ... arg){
+    public static long calcLastTime(String className,String method,Comparable [] arg){
         long starTime=System.currentTimeMillis();
         MethodProxy.run(className,method,arg);
         long endTime=System.currentTimeMillis();

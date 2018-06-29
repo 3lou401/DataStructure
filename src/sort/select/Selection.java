@@ -17,24 +17,25 @@ public class Selection extends Basetemplate {
     @Override
     public void sort(Comparable[] a) {
         if (a == null || a.length <= 1)
-            return ;
+            return;
         //最小的位置一定是从0开始
-        for (int i = 0; i < a.length;i++){
+        for (int i = 0; i < a.length; i++) {
+            //加一个不为空的原因是 new一个100000的数组，只放入了 900个数
             Comparable temp = a[i];
             int min = i;
-            for (int j =i+1; j<a.length;j++){
-                if (less(a[j],temp)){
+            for (int j = i + 1; j < a.length; j++) {
+                if (less(a[j], temp)) {
                     min = j;
                 }
             }
-            exch(a,min,i);
+            exch(a, min, i);
         }
     }
 
 
     public static void main(String[] args) {
         Selection sel = new Selection();
-        Integer [] a = {1,3,2,1123,23,56,29,9,-2};
+        Integer[] a = {1, 3, 2, 1123, 23, 56, 29, 9, -2};
         sel.sort(a);
         show(a);
     }
