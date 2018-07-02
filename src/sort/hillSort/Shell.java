@@ -1,6 +1,9 @@
 package sort.hillSort;
 import sort.base.Basetemplate;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 
 /**
  * @Author: leaderHoo
@@ -15,6 +18,9 @@ import sort.base.Basetemplate;
  *                  for（int j =i ;j-h>0 && a[j] <a[j-h];i-=h）
  *           h/=2;
  *      2. 计算最开始h的时候； 可以直接用 len/2 或者 while(h < len/2) h=h*2+1;
+ * @Notify2 :
+ *      1. 希尔排序最核心的是 "h每次都是递减，i=h递增到a.lenght, 注意j（j 只要是大于h就会比较a[j]与a[j-h]，
+ *              也就是 会对数组 a[i],a[i+h],a[i+2h],a[i+3h] ...a[j] 排序）"
  */
 
 public class Shell extends Basetemplate {
@@ -31,6 +37,7 @@ public class Shell extends Basetemplate {
                     exch(a,j,j-h);
                 }
             }
+            System.out.println(Arrays.toString(a));
             h/=2;
         }
     }
@@ -57,7 +64,8 @@ public class Shell extends Basetemplate {
 
     public static void main(String []args){
         Integer []arr ={1,4,2,7,9,8,3,4};
-
+        Shell shell = new Shell();
+        shell.sort(arr);
     }
 
 }

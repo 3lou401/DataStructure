@@ -20,7 +20,7 @@ public class Selection extends Basetemplate {
             return;
         //最小的位置一定是从0开始
         for (int i = 0; i < a.length; i++) {
-            //加一个不为空的原因是 new一个100000的数组，只放入了 900个数
+            //加一个不为空的原因是 new一个100000的数组，只放入了 900个数是有可能的
             Comparable temp = a[i];
             int min = i;
             for (int j = i + 1; j < a.length; j++) {
