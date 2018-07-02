@@ -33,11 +33,10 @@ public class Shell extends Basetemplate {
         int h = N/2;
         while (h >=1){
             for (int i = h; i < a.length;i++){
-                for (int j = i;j >h && less(a[j],a[j-h]);j-=h){
+                for (int j = i;j >= h && less(a[j],a[j-h]);j-=h){
                     exch(a,j,j-h);
                 }
             }
-            System.out.println(Arrays.toString(a));
             h/=2;
         }
     }
@@ -63,9 +62,10 @@ public class Shell extends Basetemplate {
 
 
     public static void main(String []args){
-        Integer []arr ={1,4,2,7,9,8,3,4};
+        Integer []arr ={99,1,4,2,7,9,8,3,4};
         Shell shell = new Shell();
         shell.sort(arr);
+        show(arr);
     }
 
 }

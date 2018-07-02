@@ -16,7 +16,7 @@ public abstract class Basetemplate {
    public static boolean less(Comparable a, Comparable b){
        if (a == null || b == null)
            return false;
-       return a.compareTo(b) < 0;
+       return a.compareTo(b) <= 0;
    }
    //交换数组元素
    public static void exch(Comparable []a ,  int i,int j){

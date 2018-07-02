@@ -3,6 +3,7 @@ package sort.base;
 import jdk.management.resource.internal.inst.FileOutputStreamRMHooks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,30 +15,32 @@ import java.util.List;
 public class CompareSort {
 
     public static void main(String[] args) {
-        Integer [] a = new Integer[60001];
-        Integer [] b = new Integer[60001];
-        Integer [] c = new Integer[60001];
+        Integer [] a = new Integer[90000];
+        Integer [] b = new Integer[90000];
+        Integer [] c = new Integer[90000];
 
-//        for (int i = 9000;i >0 ;i--){
-//            int num = (int) (Math.random() * (9000)) + 1;
-//            a[i] = num;
-//            b[i] = num;
-//            c[i] = num;
-//        }
-        for (int i=0;i<40000;i++){
-            a[i] = 9000;
-            b[i] = 9000;
+        for (int i = 0;i < 90000 ;i++){
+            int num = (int) (Math.random() * (9000)) + 1;
+            a[i] = num;
+            b[i] = num;
+            c[i] = num;
         }
-        String claz1 = "sort.select.Selection";
-        String func1 = "sort";
-        System.out.println("Selection spended time is "+  CalcTime.calcLastTime(claz1,func1,a));
-        String claz2 = "sort.insert.Insertion";
-        String func2 = "sort";
-        System.out.println("Insertion spended time is "+  CalcTime.calcLastTime(claz2,func2,b));
+//        for (int i=0;i<40000;i++){
+//            a[i] = 9000;
+//            b[i] = 9000;
+//        }
+        String func = "sort";
+//        String claz1 = "sort.select.Selection";
+//        System.out.println("Selection spended time is "+  CalcTime.calcLastTime(claz1,func,a));
+//        String claz2 = "sort.insert.Insertion";
+//        System.out.println("Insertion spended time is "+  CalcTime.calcLastTime(claz2,func,b));
 
 //        String claz3 = "sort.hillSort.Shell";
-//        String func3 = "sort";
-//        System.out.println("Insertion spended time is "+  CalcTime.calcLastTime(claz3,func3,c));
+//        System.out.println("Shell spended time is "+  CalcTime.calcLastTime(claz3,func,c));
+//        System.out.println("Shell spended Array is "+ Arrays.toString(c));
+
+        String claz4 = "sort.quickSort.Quick";
+        System.out.println("Quick spended time is "+  CalcTime.calcLastTime(claz4,func,a));
 
     }
 }
