@@ -22,8 +22,8 @@ public class CompareSort {
         for (int i = 0;i < 90000 ;i++){
             int num = (int) (Math.random() * (9000)) + 1;
             a[i] = num;
-            b[i] = num;
-            c[i] = num;
+//            b[i] = num;
+//            c[i] = num;
         }
 //        for (int i=0;i<40000;i++){
 //            a[i] = 9000;
@@ -39,8 +39,10 @@ public class CompareSort {
 //        System.out.println("Shell spended time is "+  CalcTime.calcLastTime(claz3,func,c));
 //        System.out.println("Shell spended Array is "+ Arrays.toString(c));
 
-        String claz4 = "sort.quickSort.Quick";
-        System.out.println("Quick spended time is "+  CalcTime.calcLastTime(claz4,func,a));
+//        String claz4 = "sort.quickSort.Quick";
+//        System.out.println("Quick spended time is "+  CalcTime.calcLastTime(claz4,func,a));
+        String claz4 = "sort.merge.Mergee";
+        System.out.println("Mergee spended time is "+  CalcTime.calcLastTime(claz4,func,a));
 
     }
 }
