@@ -9,6 +9,8 @@ import java.util.Arrays;
  * @Date: 2018/6/22 18:53
  * @desc： 归并排序 ：利用内存，创建一个大小是两个子序列之和的数组，进行插入
  *  NlogN
+ * @Note
+ *      1.归并操作，将两个数组合二为一
  */
 public class Merge extends Basetemplate {
 

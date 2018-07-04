@@ -40,12 +40,12 @@ public class Quick extends Basetemplate {
             while (less(a[i],key) && i < j)
                 i++;
             //TODO Very Important 只有i < j的情况下，才可以交换
-            if (i<j)
-                exch(a,i,j);
+            if (i >= j)
+                break;
+             exch(a,i,j);
         }
         //TODO Very Important 最后需要把 a[left] 与 a[i]交换
-        a[left] = a[i];
-        a[i] = key;
+        exch(a,left,j);
         return j;
     }
 

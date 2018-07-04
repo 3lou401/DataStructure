@@ -15,23 +15,16 @@ import java.util.List;
 public class CompareSort {
 
     public static void main(String[] args) {
-        Integer [] a = new Integer[90000];
-        Integer [] b = new Integer[90000];
-        Integer [] c = new Integer[90000];
+        Integer [] a = new Integer[40000];
 
-        for (int i = 0;i < 90000 ;i++){
+        for (int i = 0;i < 40000 ;i++){
+//            int num = 9999;
             int num = (int) (Math.random() * (9000)) + 1;
-            a[i] = num;
-//            b[i] = num;
-//            c[i] = num;
+//            a[i] = num;
         }
-//        for (int i=0;i<40000;i++){
-//            a[i] = 9000;
-//            b[i] = 9000;
-//        }
         String func = "sort";
-//        String claz1 = "sort.select.Selection";
-//        System.out.println("Selection spended time is "+  CalcTime.calcLastTime(claz1,func,a));
+        String claz1 = "sort.select.Selection";
+        System.out.println("Selection spended time is "+  CalcTime.calcLastTime(claz1,func,a));
 //        String claz2 = "sort.insert.Insertion";
 //        System.out.println("Insertion spended time is "+  CalcTime.calcLastTime(claz2,func,b));
 
@@ -41,8 +34,11 @@ public class CompareSort {
 
 //        String claz4 = "sort.quickSort.Quick";
 //        System.out.println("Quick spended time is "+  CalcTime.calcLastTime(claz4,func,a));
-        String claz4 = "sort.merge.Mergee";
-        System.out.println("Mergee spended time is "+  CalcTime.calcLastTime(claz4,func,a));
+//        String claz4 = "sort.merge.Mergee";
+//        System.out.println("Mergee spended time is "+  CalcTime.calcLastTime(claz4,func,a));
+        String claz5 = "sort.quickSort.Quick3Way";
+        System.out.println("Quick3Way spended time is "+  CalcTime.calcLastTime(claz5,func,a));
+        System.out.println("Quick3Way spended Array is "+ Arrays.toString(a));
 
     }
 }

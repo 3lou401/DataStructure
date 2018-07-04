@@ -5,7 +5,7 @@ import sort.base.Basetemplate;
 /**
  * @Author: leaderHoo
  * @Date: 2018/7/2 16:49
- * @Desc： 优化，采用辅助数组实现归并排序
+ * @Desc： 优化，采用辅助数组实现归并排序 当数据量大时，创建数组也会消耗内存
  */
 public class Mergee extends Basetemplate {
 
@@ -21,7 +21,7 @@ public class Mergee extends Basetemplate {
     private void mergeSort(Comparable[] a, Comparable[] temp, int left, int right) {
         if (left < right){
             int mid = (left +right)/2;
-            mergeSort(a,temp,left,mid-1);
+            mergeSort(a,temp,left,mid);
             mergeSort(a,temp,mid+1,right);
             mergeArray(a,temp,left,mid,right);
         }
@@ -41,7 +41,7 @@ public class Mergee extends Basetemplate {
             temp[k++] = a[j++];
 
         //copy数组
-        for(int m = 0;m<k;m++)
-            a[m+left] = temp[k];
+        for(i = 0;i < k;i++)
+            a[i+left] = temp[i];
     }
 }
