@@ -33,33 +33,51 @@ public class PriorityQueueByArray<key extends Comparable<key>>
             add(k);
         }
     }
-
     @Override
     key poll() {
         if (tempSize == 0)
             return null;
-        return a[--tempSize];
+        key k = a[tempSize - 1];
+        a[--tempSize] = null; //防止对象游离
+        //小于数组1/4,将数组减半
+        if(tempSize > 0 && tempSize == a.length/4) {
+            resizingArray(a.length/2);
+        }
+        return k;
     }
+
+    //调整数组大小
+    public void resizingArray(int num) {
+        @SuppressWarnings("unchecked")
+        key[] temp = (key[])new Comparable[num];
+        for(int i=0;i<tempSize;i++) {
+                temp[i] = a[i];
+        }
+        a = temp;
+    }
+
     //插入的时候，保证数组顺序
     @Override
     void add(key key) {
-        if (tempSize == 0){
-            a[0] = key;
-            tempSize++;
-            return;
-        }
         //如果数组容量不足，需要扩容
         if (tempSize >= a.length)
             ensureCapcity(a);
 
-        a[tempSize] = key;
-        //插入到指定元素位置
-        for (int i = tempSize ; i > 0;i--){
-            if (a[i].compareTo(a[i-1]) > 0){
+        //将key放入数组
+        a[tempSize++] = key;
+        insertSort(a);
+    }
+
+    private void insertSort(key[] a) {
+        int i = tempSize-1;
+        //数组实际上是从temp - 1开始循环
+        if (i == 0)
+            return;
+        for (;i>0;i--){
+            if (a[i].compareTo(a[i-1]) < 0){
                 exch(a,i,i-1);
             }
         }
-        tempSize++;
     }
 
     @Override
