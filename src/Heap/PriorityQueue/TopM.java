@@ -1,5 +1,7 @@
 package Heap.PriorityQueue;
 
+import Heap.BinaryHeap.MaxMQ;
+
 import java.util.Scanner;
 
 /**
@@ -11,7 +13,7 @@ import java.util.Scanner;
  */
 public class TopM {
     public static void main(String[] args) {
-        PriorityQueueByArray<Integer> pq = new PriorityQueueByArray<>(20);
+        MaxMQ<Integer> pq = new MaxMQ<>(20);
         Scanner sc = new Scanner(System.in);
         String val = "";
 
@@ -23,7 +25,7 @@ public class TopM {
         pollDataFromQueue(pq);
     }
     //用于从队列取数据的通用方法
-    private static void pollDataFromQueue(PriorityQueueByArray<Integer> customerPriorityQueue) {
+    private static void pollDataFromQueue(MaxMQ<Integer> customerPriorityQueue) {
         while(true){
             Integer cust = customerPriorityQueue.poll();
             if(cust == null) break;
