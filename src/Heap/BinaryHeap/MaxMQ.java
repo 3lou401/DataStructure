@@ -8,22 +8,34 @@ package Heap.BinaryHeap;
  * 某个节点优先级下降，将根节点替换为较小元素时，需要由上到下恢复堆序
  * @note2 插入元素时，将新元素添加到数组末尾，增加堆得大小，并让新元素上浮到合适的位置
  * 删除最大元素时，从数组顶端删除最大元素，将数组最后一个元素放到顶端，减小堆的大小，并下沉元素
+ * @note3
+ *      数组 0 位置不用 所以 直接用a[curentSize]
+ *
  */
 public class MaxMQ<key extends Comparable<key>> {
 
     private key[] pq;
-    private int currentSize = 0;
+    public  int currentSize = 0;
 
+    public MaxMQ() {
+    }
 
     public MaxMQ(int MaxSize) {
         pq = (key[]) new Comparable[MaxSize + 1];
     }
 
+    public boolean isEmpty(){
+        return currentSize == 0;
+    }
+
+    public int size(){
+        return currentSize;
+    }
     public void add(key key) {
         //扩容
-        if (currentSize == pq.length)
+        if (currentSize  == pq.length - 1)
             // 扩容数组
-            encapicity(currentSize*2);
+            resizingArray(currentSize*2);
         pq[++currentSize] = key;
         swim(currentSize);
     }
@@ -31,13 +43,17 @@ public class MaxMQ<key extends Comparable<key>> {
 
     //delMax
     public key poll() {
-        key max = pq[1];
-        exch(1, currentSize--);
-        pq[currentSize + 1] = null;
+        key max = pq[1];   //返回根节点
+        exch(1, currentSize--); //首尾交换
+        //小于数组1/4,将数组减半
+        if(currentSize > 0 && currentSize == pq.length/4) {
+            resizingArray(pq.length/2);
+        }
+        pq[currentSize +1] = null; //防止越界
         sink(1);
         return max;
     }
-
+    //TODO 此处存在BUG,执行多次之后，pq[1]成为null
     private boolean less(int i, int j) {
         return pq[i].compareTo(pq[j]) <= 0;
     }
@@ -71,8 +87,8 @@ public class MaxMQ<key extends Comparable<key>> {
         }
     }
 
-    //数组扩容
-    private  void encapicity(int len){
+    //数组大小修改
+    private  void resizingArray(int len){
         key [] keys = (key[]) new Comparable[len];
         for(int i=0;i<currentSize;i++) {
             keys[i] = pq[i];

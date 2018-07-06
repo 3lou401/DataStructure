@@ -26,9 +26,8 @@ public class TopM {
     }
     //用于从队列取数据的通用方法
     private static void pollDataFromQueue(MaxMQ<Integer> customerPriorityQueue) {
-        while(true){
+        while(customerPriorityQueue.currentSize != 0){
             Integer cust = customerPriorityQueue.poll();
-            if(cust == null) break;
             System.out.println("Processing  with ID="+cust);
         }
     }
