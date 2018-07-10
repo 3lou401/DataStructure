@@ -25,12 +25,12 @@ public class HeapSort extends Basetemplate {
         //1.构建大顶堆
         for (int i = n / 2 - 1; i >= 0; i--) {
             //从第一个非叶子结点从下至上，从右至左调整结构
-            adjustHeap(arr, i, n);
+            sink(arr, i, n);
         }
         //2.调整堆结构+交换堆顶元素与末尾元素
         for (int j = n - 1; j > 0; j--) {
             exch(arr, 0, j);//将堆顶元素与末尾元素进行交换
-            adjustHeap(arr, 0, j);//重新对堆进行调整
+            sink(arr, 0, j);//重新对堆进行调整
         }
     }
 
@@ -63,6 +63,22 @@ public class HeapSort extends Basetemplate {
         HeapSort heapSort = new HeapSort();
         heapSort.sort(arr);
         System.out.println(Arrays.toString(arr));
+    }
+
+
+    //和之前的大根堆不同的地方：数组从0开始  0 的儿子是 1 2 1的儿子 3 4 2的儿子三个 5 6
+    public void sink(Comparable[]a,int k,int n){
+        while ((k * 2 + 1) < n    ){
+            int j = k * 2 + 1 ;
+            //找到儿子节点中较大值
+            if (j+1 < n && less(a[j],a[j+1]))
+                j++;
+            //如果儿子最大值小于父亲，跳过
+            if (a[k].compareTo(a[j]) > 0)
+                break;
+            exch(a,k,j);
+            k = k*2+1;
+        }
     }
 
 }
