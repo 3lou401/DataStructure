@@ -69,7 +69,7 @@ public class STByUnOrderedLinkedList<K extends Comparable<K>,V> implements ST<K 
             return;
         }
 
-        //如果删除元素在表头的下一个元素到结束元素怒
+        //TODO 如果删除元素在表头的下一个元素到结束元素
          for (Node node = head,pre= head;node !=null;pre = node,node = node.next){
              if (node.next != null){
                  Node  checkNode = node.next;

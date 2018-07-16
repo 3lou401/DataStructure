@@ -1,6 +1,5 @@
 package SymbolTable;
 
-import edu.princeton.cs.algs4.BinarySearch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +30,8 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         }
         //键值不存在，判断数组是否越界并将数组扩容
         if (size == keys.length) resize(2 * keys.length);
+
+        //将元素插入到指定位置
         for (int i = size; i > pos; i--) {
             keys[i] = keys[i - 1];
             values[i] = values[i - 1];
@@ -68,7 +69,9 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
             return null;
         }
         Value value = values[pos];
+        //数组容量变小
         if (size < keys.length / 2) resize(keys.length / 2);
+        //通过移动元素删除
         for (int i = pos; i < size - 1; i++) {
             keys[i] = keys[i + 1];
             values[i] = values[i + 1];
@@ -88,7 +91,8 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
     public Key max() {
         return keys[size - 1];
     }
-
+    
+    //小于等于key的最大值
     public Key floor(Key key) {
         int pos = rank(key);
         if (pos < size && keys[pos].compareTo(key) == 0) {
@@ -96,13 +100,19 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         }
         return keys[pos - 1];
     }
-
+    //大于等于key的最小值
     public Key ceiling(Key key) {
         int pos = rank(key);
         return keys[pos];
     }
 
-    //非递归的二分查找
+    /**   
+    * @author leaderHoo
+    * @date 2018/7/14 12:01
+    * @param [key]
+    * @Desc   非递归查找当前key值所在位置
+    * @return int ：如果找到key，返回key的位置；如果未找到，返回当前key应该存在位置小于key的最大元素的下一个位置
+    */ 
     public int rank(Key key) {
         int low = 0;
         int high = size - 1;
@@ -113,6 +123,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
             else if (cmp > 0) low = middle + 1;
             else return middle;
         }
+        //TODO
         return low;
     }
 
