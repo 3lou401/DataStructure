@@ -1,5 +1,7 @@
 package SymbolTable;
 
+import edu.princeton.cs.algs4.Queue;
+import jdk.nashorn.internal.ir.IfNode;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import sun.reflect.generics.tree.VoidDescriptor;
 
@@ -30,32 +32,82 @@ public class BST<Key extends Comparable<Key>,Value> {
         return size(root);
     }
     private int size(Node x){
+        if(x == null)
+            return 0;
         return x.N;
     }
 
     public Value get(Key key){
         return get(root,key);
     }
+
     private Value get(Node node,Key key){
         if (node == null) return  null;
-        int cmp = node.key.compareTo(key);
-        if (cmp < 0) return get(node.right,key);
-        else if (cmp > 0) return get(node.left,key);
+        int cmp = key.compareTo(node.key);
+        if (cmp > 0) return get(node.right,key);
+        else if (cmp < 0) return get(node.left,key);
         else return node.value;
     }
+
+    public Key min(){
+        if(min(root) == null)
+            return null;
+        return min(root).key;
+    }
+
+    private Node min(Node root){
+        if (root == null) return  null;
+        return min(root.left);
+    }
+
     public  void  put(Key key, Value value){
         root=put(root,key,value);
     }
-
+    /**
+    * @author leaderHoo
+    * @date 2018/7/17 10:48
+    * @Desc   递归重置每一个父节点指向子节点的连接，并修改子节点的连接
+    */
     private Node put(Node x ,Key key,Value value){
         if (x == null ) return  new Node(key,value,1);
-        int cmp = x.key.compareTo(key);
-        if (cmp < 0 ) x.right =  put(x.right,key,value);
-        else if (cmp > 0 )x.left= put(x.left,key,value);
+        int cmp = key.compareTo(x.key);
+        //key小于当前节点的值，操作左子树，并让当前节点指向修改后的子树
+        if (cmp < 0 ) x.left =  put(x.left,key,value);
+        //key大于当前节点，修改右子树，，并让当前节点的右儿子指向修改后的右儿子
+        else if (cmp > 0 )x.right= put(x.right,key,value);
         else  x.value = value;
         x.N = size(x.left)+size(x.right)+1;
         return x;
     }
+    /**
+    * @author leaderHoo
+    * @date 2018/7/17 10:53
+    * @Desc   向下取整（不大于key的最大值）
+    */
+    public Key floor(Key key){
+        Node t = floor(root,key);
+        if (t == null)
+            return null;
+        return t.key;
+    }
+
+    private Node floor(Node x, Key key) {
+        if (x == null) return null;
+        int cmp= key.compareTo(x.key);
+        if (cmp == 0)
+            return x;
+        if (cmp > 0)
+             return floor(x.left,key);
+        //如果当前节点值小于key值
+        Node t = floor(x.right,key);
+        if (t == null )
+            return x;
+        else
+            return t;
+
+    }
+
+
     /**
     * @author leaderHoo
     * @date 2018/7/16 17:36
@@ -65,8 +117,28 @@ public class BST<Key extends Comparable<Key>,Value> {
         root = delete(root,key);
     }
 
-    private Node delete(Node root, Key key) {
-        return  null;
+    private Node delete(Node x, Key key) {
+        if (x == null)
+            return  null;
+        int cmp = key.compareTo(x.key);
+
+        if (cmp == 0 ){
+            //当前节点是要删除的节点
+            if (x.right == null)
+                return  x.left;
+            if (x.left == null)
+                return x.right;
+            //如果左右儿子节点都不为空，则取出右儿子中最小值，作为
+            Node t = x;
+            x = min(t.right); //要返回的当前节点
+            x.right = deleteMin(t.right);
+            x.left = t.left;
+        }else if(cmp > 0)
+            return delete(x.right,key);
+        else if (cmp < 0)
+            return delete(x.left,key);
+        x.N = size(x.right) +size(x.left)+1;
+        return x;
     }
 
 
@@ -90,9 +162,26 @@ public class BST<Key extends Comparable<Key>,Value> {
         x.N = size(x.left)+size(x.right)+1;
         return x;
     }
-
+    //TODO 待开发
     public int rank(){
         return 0;
+    }
+
+    public Iterable<Key> keys(Key lo, Key hi){
+        Queue<Key> queue = new Queue<>();
+         keys(root,queue,lo,hi);
+         return queue;
+    }
+
+    private void  keys(Node x, Queue<Key> queue, Key lo, Key hi) {
+        if (x == null)
+            return;
+        int cmplo = lo.compareTo(x.key);
+        int cmphi = hi.compareTo(x.key);
+        if (cmplo < 0)  keys(x.left,queue,lo,hi);
+        if (cmphi >0) keys(x.right,queue,lo,hi);
+        if (cmplo >=0 && cmphi <=0)
+            queue.enqueue(x.key);
     }
 
 }
