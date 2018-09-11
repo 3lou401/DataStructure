@@ -1,5 +1,8 @@
 package com.Concurrent;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @Author: leaderHoo
  * @Date: 2018/9/3 17:54
@@ -25,14 +28,46 @@ package com.Concurrent;
  *      public final int decrementAndGet()    //对AtomicInteger原子的减1并返回减1后的值
  *      public final int addAndGet(int delta)   //给AtomicInteger原子的加上指定的delta值并返回加后的值
  *
- * @apiNote  CAS ：乐观锁 compareandswap
+ * @apiNote Java AtomicInteger 使用乐观锁
  *          Unsafe 是做一些Java语言不允许但是又十分有用的事情，具体的实现都是native方法，
- *      AtomicInteger里调用的 Unsafe 方法 基于的是CPU 的 CAS指令来实现的。
+ *      AtomicInteger 里调用的 Unsafe 方法 基于的是CPU 的 CAS指令来实现的。
  *      所以基于 CAS 的操作可认为是无阻塞的，一个线程的失败或挂起不会引起其它线程也失败或挂起。
- *      并且由于 CAS 操作是 CPU 原语，所以性能比较好
- * @apiNote  CAS 乐观锁的实现形式
  *
+ * @apiNote  CAS ：乐观锁 compareandswap 两种实现形式
+ *           1. 使用版本标识来确定读到的数据与提交时的数据是否一致。提交后修改版本标识，不一致时可以采取丢弃和再次尝试的策略
+ *           2. 如果内存值为1，预期值为1，则修改新值。对于没有执行的操作则丢弃。Java中cas
+ * @apiNote
+ *      乐观锁适合这样的场景：读不会冲突，写会冲突。同时读的频率远大于写
+ *      总结：两种所各有优缺点，读取频繁使用乐观锁，写入频繁使用悲观锁。
  */
 public class ThreadSafe {
+    public static Map map = new HashMap();
 
+    //悲观锁
+    public Object get(Object key) {
+        synchronized(map) {
+            if(map.get(key) == null) {
+                // set some values
+            }
+
+            return map.get(key);
+        }
+    }
+    //乐观锁
+    public Object get1(Object key) {
+        Object val = null;
+        if((val = map.get(key)) == null){
+            // 当map取值为null时再加锁判断
+            synchronized(map) {
+                if((val = map.get(key) )== null) {
+                    // set some value to map...
+                }
+            }
+        }
+
+        return map.get(key);
+    }
+    public static void main(String[] args) {
+
+    }
 }

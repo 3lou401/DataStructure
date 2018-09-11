@@ -8,29 +8,29 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class AtomicIntegerUseCase {
 
-    public static int count = 0;
 
     public static void main(String[] args) throws InterruptedException {
-//        MyThread myThread = new MyThread();
-//
-//        Thread t1 = new Thread(myThread);
-//        Thread t2 = new Thread(myThread);
-//
-//        t1.start();
-//        t2.start();
-//
-//        Thread.sleep(500);
-//
-//        System.out.printf("a =" +MyThread.a);
+        MyThread myThread = new MyThread();
 
+        Thread t1 = new Thread(myThread);
+        Thread t2 = new Thread(myThread);
 
-        System.out.printf("count = " +count);
+        t1.start();
+        t2.start();
+
+        Thread.sleep(10);
+
+        System.out.println("count =" +MyThread.count);
+        System.out.printf("a =" +MyThread.a);
+
     }
 }
 
 class MyThread implements  Runnable{
 
     static AtomicInteger a = new AtomicInteger(0);
+
+    static  int count = 0 ;
 
     /**
      * When an object implementing interface <code>Runnable</code> is used
@@ -47,6 +47,7 @@ class MyThread implements  Runnable{
     public void run() {
         for (int i = 0;i < 1000;i++){
             a.getAndIncrement();
+            count++;
         }
     }
 }
